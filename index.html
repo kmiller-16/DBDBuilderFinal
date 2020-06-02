@@ -1,0 +1,582 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta charset="utf-8"/>
+		<style>
+		table{
+			table-layout: fixed;
+		}
+		#banner{
+			max-height: 600px;
+			max-width: 200px;
+			display: block;
+			margin: auto;
+		}
+		html{
+			background: black;
+		}
+		#perks{
+			width: 100%;
+			height: auto;
+		}
+		.misc{
+			width: 100%;
+			/*border: 1px solid white;
+			border-collapse: collapse*/
+		}
+		.misc th{
+			/*border: 1px solid white; */
+			height: 100%;
+		}
+		#loadoutpanel{
+			float: right;
+			height:  50%;
+			width: 84%;
+			display: block;
+			/*background-color: #999999;*/
+			background-image: url('http://www.dbdbuilder.net/graphics/newbckrnd.jpg'); 
+			background-size: cover;
+		}
+		#portrait{
+			/*position: relative;*/
+			float: left;
+			height: 50%;
+			width: 15%;
+			display: block;
+			padding-right: 2px;
+			/*border: 2px solid white;*/
+		}
+		#fullsize{
+			width: 96%;
+			height: 40%;
+			background-image:url('http://www.dbdbuilder.net/graphics/Potential_Bckrnd.png');
+			background-size: cover;
+			display: block;
+		}
+		.underlay{ /*perks*/
+			position: absolute;
+			right: 21%;
+			top: 15%;
+			width: 59%;
+			z-index: 1;
+		}
+		.underlay2{ /*addon*/
+			position: absolute;
+			right: 10%;
+			top: 6%;
+			width: 75%;
+			z-index: 1;
+		}
+		.overlay{
+			position: relative;
+			top: 5%;
+			left: 0;
+			width: 65%;
+			z-index: 2;
+		}
+		.setforloadout{
+			position: relative;
+			top: 0;
+			left: 0;
+			display: block;
+		}
+		.overlay2{
+			position: relative;
+			top: 0;
+			left: 0;
+			margin-top: 8%;
+			margin-bottom: 7%;
+			width: 50%;
+			z-index: 2;
+		}
+		.overlay3{
+			position: relative;
+			top: 0;
+			left: 0;
+			width: 65%;
+			z-index: 2;
+		}
+		.underlay3{ /*addon*/
+			position: absolute;
+			right: 23%;
+			top: 20%;
+			width: 53%;
+			z-index: 1;
+		}
+		.underlay4{ /*item*/
+			position: absolute;
+			right: 21%;
+			top: 15%;
+			width: 60%;
+			z-index: 1;
+		}
+		#overpanel{
+			position: absolute;
+			height: 67%;
+			width: 84%;
+			background-color: black;
+			color: white;
+			top: 12%;
+			left: 15%;
+			z-index: 3;
+			display: none;
+			font-family: Sans-serif;
+		}
+		#opTable{
+			width: 100%;
+			table-layout: fixed;
+		}
+		.cellcontainer{
+			width: 25%;
+			border: 1px solid white;
+		}
+		.cellcontainer2{
+			width: 25%;
+			border: 1px solid white;
+		}
+		.holdicon{
+			float: left;
+			width: 20%;
+		}
+		.holdname{
+			float: left;
+			width: 80%;
+			padding: 6.5% 0;
+			text-align: center;
+			overflow: hidden;
+			font-size: small;
+		}
+/* Customize the label (the container) */
+.holdname2{
+			display: block;
+			float: left;
+			width: 80%;
+			padding: 6.5% 0;
+			overflow: hidden;
+			font-size: small;
+			position: relative;
+			cursor: pointer;
+			-webkit-user-select: none;
+			-moz-user-select: none;
+			-ms-user-select: none;
+			user-select: none;
+		}
+/* Hide the browser's default checkbox */
+.holdname2 input{
+			position: absolute;
+			opacity: 0;
+			cursor: pointer;
+		}
+/* Create a custom checkbox */
+.boxcheck{
+	position: absolute;
+	top: 28%;
+	left: 2%;
+	height: 24px;
+	width: 24px;
+	background-color: #eee;
+}
+/* On mouse-over, add a grey background color */
+.holdname2:hover input ~ .boxcheck{
+			background-color: #ccc;
+		}
+/* When the checkbox is checked, add a red background */
+.holdname2 input:checked ~ .boxcheck{
+			background-color: red;
+		}
+/* Create the checkmark/indicator (hidden when not checked) */
+.boxcheck:after{
+	content: "";
+	position: absolute;
+	display: none;
+}
+/* Show the checkmark when checked */
+.holdname2 input:checked ~ .boxcheck:after{
+	display: block;
+}
+/* Style the checkmark/indicator */
+.holdname2 .boxcheck:after{
+		left: 9px;
+		top: 5px;
+		width: 5px;
+		height: 10px;
+		border: solid white;
+		border-width: 0 3px 3px 0;
+		-webkit-transform: rotate(45deg);
+		-ms-transform: rotate(45deg);
+		transform: rotate(45deg);
+	}
+
+		.pfNav{
+			width: 16%;
+		}
+		.pfButton{
+			width: 17%;
+		}
+		.holdicon img{
+			display: block;
+			width: 100%;
+			height: auto;
+		}
+		.cellcontainer:hover{
+			cursor: pointer;
+		}
+		.cellcontainer:hover > .holdname {
+			color: black;
+			background-color: white;
+		}
+		.menuNav{
+			width: 25%;
+		}
+		.menuBlank{
+			width: 25%;
+		}
+		#disclaimer{
+			font-size: x-small;
+		}
+		.menuClose{
+			width: 25%;
+		}
+		#bottomNav{
+			width: 100%;
+			table-layout: fixed;
+			background-color: black;
+		}
+		#bottomNav th{
+			border: 1px solid white;
+		}
+		#bottomNav th:hover{
+			color: black;
+			background-color: white;
+			cursor: pointer;
+		}
+#bottomtext{
+	width: 100%;
+	color: white;
+	font-family: sans-serif;
+	display: block;
+	position: fixed;
+  	right: 0;
+  	bottom: 0%;
+  	left: 0;
+  	padding: 1rem;
+	text-align: center;
+	font-size: small;
+        z-index: -1;
+}
+#linkout{
+	width: 384px;
+}
+.killsurv{
+	width: 48%;
+	max-height: 20%;
+	position: relative;
+	display: inline-block;
+	padding-left: 2px;
+}
+.killsurv img:hover{
+	border: 2px solid white;
+}
+.killsurv img{
+	width: 97%;
+	border: 2px solid black;
+	display: block;
+	float: left;
+}
+#quickbtn{
+	width: 92%;
+	height: 5%;
+	display: block;
+	border: 2px solid black;
+	cursor: pointer;
+}
+#quickbtn:hover{
+	border: 2px solid white;
+}
+#quickimg{
+	width: 100%;
+	display: block;
+}
+.appbtns{
+	width: 32%;
+	max-height: 20%;
+	display: block;
+	float: left;
+}
+.appbtns img{
+	width: 95%;
+	display: block;
+	border: 2px solid black;
+	float: left;
+}
+.appbtns img:hover{
+	border: 2px solid white;
+}
+.lo_text{
+	color: white;
+	font-family: "arial";
+	background-color: black;
+	/*overflow: none;*/
+	/*attempt at dot wrap*/
+	text-overflow: ellipsis;
+	overflow: hidden;
+	white-space: nowrap;
+}
+.button_bar{
+	height: 20%;
+	position: relative;
+	left: 24%;
+	top: -25%;
+	display: block;
+	cursor: pointer;
+}
+.button_bar img{
+	width: 15%;
+	display: block;
+	border: 2px solid black;
+	float: left;
+}
+.button_bar img:hover{
+	border: 2px solid white;
+}
+.lo_text2{
+	position: relative;
+	color: white;
+	background-color: black;
+	font-family: "arial";
+	/*overflow: none;*/
+	/*attempt at dot wrap*/
+	text-overflow: ellipsis;
+	overflow: hidden;
+	white-space: nowrap;
+}
+.lo_text3{
+	position: relative;
+	top: 0;
+	color: white;
+	background-color: black;
+}
+.lineup{
+	position: relative;
+	float: left;
+	width: 46%;
+	display:inline-block;
+	padding-left: 2px;
+	padding-right: 2px;
+}
+.lineup img{
+	border: 2px solid black;
+}
+.lineup img:hover{
+	border: 2px solid white;
+}
+.twopack {
+    /*float: left;*/
+    display: inline-block;
+    border: none;
+    cursor: pointer;
+    width: 100%;
+    overflow: hidden;
+}
+
+.twopack_contain, .onepack_contain, .threepack_contain {
+    position: relative;
+    display: inline-block;
+}
+.tp_drop_list{
+    display: none;
+    position: absolute;
+    background-color: black;
+    min-width: 7em;
+    top: 100%;
+    overflow: none;
+    font-family: "Arial";
+    box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+    z-index: 1;
+}
+.thp_drop_list {
+	    display: none;
+    position: absolute;
+    background-color: black;
+    min-width: 150px;
+    bottom: 100%;
+    overflow: auto;
+    font-family: "Arial";
+    box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+    z-index: 5;
+   }
+
+.tp_drop_list p, .op_drop_list p, .thp_drop_list p {
+    color: white;
+    padding: none;
+    text-decoration: none;
+    font-size: 12px;
+    display: block;
+    cursor: pointer;
+    float: none;
+    text-align: center;
+}
+
+.twopack_contain p:hover, .onepack_contain p:hover, .optionMe:hover {color: red}
+
+.show {display:block;}
+.lineup2{
+	float: left;
+	width: 29%;
+	display:inline-block;
+	padding-left: 2px;
+	padding-right: 2px;
+	position: relative;
+}
+.lineup2 img{
+	border: 2px solid black;
+}
+.lineup2 img:hover{
+	border: 2px solid white;
+}
+.threepack {
+    float: left;
+    display: block;
+    border: none;
+    cursor: pointer;
+    width: 100%;
+    overflow: hidden;
+}
+#plus, #minus{
+	font-size: 18px;
+}
+#animWindow {
+	color: white;
+	font-family: "arial";
+	font-size: 18px;
+	width: 400px;
+	height: 400px;
+	display: none;
+	position: absolute;
+	top: 16%;
+	left: 43%;
+	background-image: url("http://www.dbdbuilder.net/graphics/rng_bckgrnd.png");
+	background-size: contain;
+	border: 5px solid black;
+	z-index: 5;
+}
+.animText {
+	width: 100%;
+	height: 20px;
+	display: block;
+	position: relative;
+	text-align: center;
+}
+#animTitle {
+}
+#animResult {
+	display: none;
+	top: 320px;
+}
+#toAnimate {
+	position: absolute;
+	display: block;
+	top: 50%;
+	bottom: 50%;
+	width: 3px;
+	height: 3px;
+	margin-top: -1.5px;
+	margin-left: 3px;
+	margin-right: 3px;
+	}
+	#blurb{
+		width: auto%;
+		height: 15%;
+		background-color: black;
+		color: white;
+		font-family: "arial";
+		display: block;
+		font-size: x-small;
+			/*attempt at dot wrap*/
+	text-overflow: ellipsis;
+	overflow: hidden;
+	white-space: nowrap;
+	}	
+
+		</style>
+		<title>Dead By Daylight Character Builder</title>
+                <meta name="author" content="Vykaris">
+	</head>
+	<body>
+<img id= "banner" src="http://www.dbdbuilder.net/graphics/DBD_CB_BANNER.png">
+	<div id="portrait">
+		<div class="twopack_contain">
+			<div class = "lineup">
+				<img src="http://www.dbdbuilder.net/graphics/surv_btn.png" onclick="showSurvs()" class="twopack">
+  				<div id="survDropdown" class="tp_drop_list">
+    				<p>Surv1</p>
+    				<p>Surv2</p>
+    				<p>Surv3</p>
+  				</div>
+ 			</div>
+ <div class = "lineup">
+  <img src="http://www.dbdbuilder.net/graphics/killer_btn.png" onclick="showKills()" class="twopack">
+  <div id="killerDropdown" class="tp_drop_list">
+    <p>killer1</p>
+    <p>killer2</p>
+    <p>killer3</p>
+  </div>
+  </div>
+</div>		<img id="fullsize" src="http://www.dbdbuilder.net/graphics/Dbd-survivor-dwight-large.png" alt="Dwight Fairfield">
+		
+		<div id="quickbtn">
+			<img id="quickimg" src="http://www.dbdbuilder.net/graphics/quick_btn.png" onclick="siteManager.guiQuickRandom()" alt="Quick Loadout" title="Quick Loadout"></div>
+		
+<div class="threepack_contain">
+	<div class = "lineup2">
+		<img src="http://www.dbdbuilder.net/graphics/save_btn.png" onclick="showSaveMenu(); shareMenu()" class="threepack" alt="Save & Share" title="Save & Share">
+  			<div id="saveDropup" class="thp_drop_list">
+    			<form>
+				<p>Key Code: <input id="keycodeout" type="text" maxlength='29' readonly></input></p>
+				<p>Build Link: <input id="linkout" type="text" maxlength='68' readonly></input></p>
+			</form>
+ 			</div>
+ 	</div>
+	<div class = "lineup2">
+  		<img src="http://www.dbdbuilder.net/graphics/load_btn.png" onclick="showLoadMenu()" class="threepack" alt="Load Build" title="Load Build">
+  		<div id="loadDropup" class="thp_drop_list">
+    		<p>Key Code: <input id="keycodein" type="text" maxlength='29' onkeypress="if(event.keyCode == 13)siteManager.guiSubmitKey()"></input></p>
+			<p><button onClick="siteManager.guiSubmitKey()">Load Key</button></p>
+  		</div>
+  	</div>
+   	<div class = "lineup2">
+  		<img src="http://www.dbdbuilder.net/graphics/optn_btn.png" onclick="showOptnMenu()" class="threepack" alt="Options" title="Options">
+  		<div id="optnDropup" class="thp_drop_list">
+    		<p>Difficulty: <span class="optionMe" id="plus" onclick="diffUp()">  +  </span><span id="diffLvl">0</span><span class = "optionMe" id="minus" onclick="diffDown()">  -  </span></p>
+    		<p id="sounds" onclick="toggleSound()" class="optionMe">Sound: on</p>
+    		<p id="animations" onclick="toggleAnimate()" class="optionMe">Animation: on</p>
+    		<p onclick="pfOpen()" class="optionMe">Perk Filter</p>
+  		</div>
+  	</div>
+</div>
+</div>
+		
+		
+				
+		<div id="loadoutpanel"><table id="perks"><tr><th><div class="setforloadout"><div class="lo_text" id="perk1label">We're Gonna Live Forever</div><img id="perk1overlay" class="overlay"src="http://www.dbdbuilder.net/graphics/IconPerks_wereGonnaLiveForever.png"><img id="perk1underlay" class="underlay"src="http://www.dbdbuilder.net/graphics/PerkRare.png"><div class="button_bar"><img src="http://www.dbdbuilder.net/graphics/rng_btn.png" onclick="siteManager.sManager.perk1.doRNG()" alt="Random" title="Random"><img src="http://www.dbdbuilder.net/graphics/pick_btn.png" onclick="siteManager.sManager.perk1.spawnMenu()" alt="Select" title="Select"><img src ="http://www.dbdbuilder.net/graphics/reset_btn.png" onclick="clickedClear(siteManager.sManager.perk1)" alt="Reset" title="Reset"></div></div></th><th><div class="setforloadout"><div class="lo_text" id="perk2label">This Is Not Happening</div><img id="perk2overlay" class="overlay"src="http://www.dbdbuilder.net/graphics/IconPerks_thisIsNotHappening.png"><img id="perk2underlay" class="underlay"src="http://www.dbdbuilder.net/graphics/PerkVeryRare.png"><div class="button_bar"><img src="http://www.dbdbuilder.net/graphics/rng_btn.png" onclick="siteManager.sManager.perk2.doRNG()" alt="Random" title="Random"><img src="http://www.dbdbuilder.net/graphics/pick_btn.png" onclick="siteManager.sManager.perk2.spawnMenu()" alt="Select" title="Select"><img src ="http://www.dbdbuilder.net/graphics/reset_btn.png" onclick="clickedClear(siteManager.sManager.perk2)" alt="Reset" title="Reset"></div></div>
+		</th><th><div class="setforloadout"><div class="lo_text" id="perk3label">No One Left Behind</div><img id="perk3overlay" class="overlay"src="http://www.dbdbuilder.net/graphics/IconPerks_noOneLeftBehind.png"><img id="perk3underlay" class="underlay"src="http://www.dbdbuilder.net/graphics/PerkVeryRare.png"><div class="button_bar"><img src="http://www.dbdbuilder.net/graphics/rng_btn.png" onclick="siteManager.sManager.perk3.doRNG()" alt="Random" title="Random"><img src="http://www.dbdbuilder.net/graphics/pick_btn.png" onclick="siteManager.sManager.perk3.spawnMenu()" alt="Select" title="Select"><img src ="http://www.dbdbuilder.net/graphics/reset_btn.png" onclick="clickedClear(siteManager.sManager.perk3)" alt="Reset" title="Reset"></div></div></th><th><div class="setforloadout"><div class="lo_text" id="perk4label">Object of Obsession</div><img id="perk4overlay" class="overlay"src="http://www.dbdbuilder.net/graphics/IconPerks_objectOfObsession.png"><img id="perk4underlay" class="underlay"src="http://www.dbdbuilder.net/graphics/PerkVeryRare.png"><div class="button_bar"><img src="http://www.dbdbuilder.net/graphics/rng_btn.png"onclick="siteManager.sManager.perk4.doRNG()" alt="Random" title="Random"><img src="http://www.dbdbuilder.net/graphics/pick_btn.png" onclick="siteManager.sManager.perk4.spawnMenu()" alt="Select" title="Select"><img src ="http://www.dbdbuilder.net/graphics/reset_btn.png" onclick="clickedClear(siteManager.sManager.perk4)" alt="Reset" title="Reset"></div></div></th></tr>
+		
+		</table><table class="misc"><tr><th><div class="setforloadout"><div class="lo_text" id="itemOrAbilitylabel">All Hallows' Eve Lunchbox</div><img id="itemOrAbilityoverlay" class="overlay3"src="http://www.dbdbuilder.net/graphics/iconItems_medkitHalloween.png"><img id="itemOrAbilityunderlay" class="underlay4"src="http://www.dbdbuilder.net/graphics/BoxCommon.png"><div class="button_bar"><img src="http://www.dbdbuilder.net/graphics/rng_btn.png" onclick="siteManager.sManager.itemOrAbility.doRNG()" alt="Random" title="Random"><img src="http://www.dbdbuilder.net/graphics/pick_btn.png" onclick="siteManager.sManager.itemOrAbility.spawnMenu()" alt="Select" title="Select"><img src ="http://www.dbdbuilder.net/graphics/reset_btn.png" onclick="clickedClear(siteManager.sManager.itemOrAbility)" alt="Reset" title="Reset"></div></div></th><th><div class="setforloadout"><div class="lo_text2" id="addon1label">Anti-Hemorrhagic Syringe</div><img id="addon1overlay" class="overlay2"src="http://www.dbdbuilder.net/graphics/IconAddon_syringe.png"><img id="addon1underlay" class="underlay3"src="http://www.dbdbuilder.net/graphics/BoxUltraRare.png"><div class="button_bar" ><img src="http://www.dbdbuilder.net/graphics/rng_btn.png" onclick="siteManager.sManager.addon1.doRNG()" alt="Random" title="Random"><img src="http://www.dbdbuilder.net/graphics/pick_btn.png" onclick="siteManager.sManager.addon1.spawnMenu()" alt="Select" title="Select"><img src ="http://www.dbdbuilder.net/graphics/reset_btn.png" onclick="clickedClear(siteManager.sManager.addon1)" alt="Reset" title="Reset"></div></div></th><th><div class="setforloadout"><div class="lo_text2" id="addon2label">Abdominal Dressing</div><img id="addon2overlay" class="overlay2"src="http://www.dbdbuilder.net/graphics/IconAddon_abdominalDressing.png"><img id="addon2underlay" class="underlay3"src="http://www.dbdbuilder.net/graphics/BoxRare.png"><div class="button_bar"><img src="http://www.dbdbuilder.net/graphics/rng_btn.png" onclick="siteManager.sManager.addon2.doRNG()" alt="Random" title="Random"><img src="http://www.dbdbuilder.net/graphics/pick_btn.png" onclick="siteManager.sManager.addon2.spawnMenu()" alt="Select" title="Select"><img src ="http://www.dbdbuilder.net/graphics/reset_btn.png" onclick="clickedClear(siteManager.sManager.addon2)" alt="Reset" title="Reset"></div></div></th><th><div class="setforloadout"><div class="lo_text" id= "offeringlabel">Abdominal Dressing</div><img id="offeringoverlay" class="overlay"src="http://www.dbdbuilder.net/graphics/iconFavors_psychiatricAssessmentReport.png"><img id="offeringunderlay" class="underlay"src="http://www.dbdbuilder.net/graphics/OffUncommon.png"><div class="button_bar"><img src="http://www.dbdbuilder.net/graphics/rng_btn.png" onclick="siteManager.sManager.offering.doRNG()" alt="Random" title="Random"><img src="http://www.dbdbuilder.net/graphics/pick_btn.png" onclick="siteManager.sManager.offering.spawnMenu()" alt="Select" title="Select"><img src ="http://www.dbdbuilder.net/graphics/reset_btn.png" onclick="clickedClear(siteManager.sManager.offering)" alt="Reset" title="Reset"></div></div></th></tr></table>
+		<div id="animWindow">
+			<div class="animText" id="animTitle">The Entity Gives You....</div>
+			<div><img id="toAnimate" src="iconHelp_HowToWin_killers.png"></div>
+			<div id="animResult" class="animText">Blu blu blah bla</div>
+		</div>
+		<br>
+		<div id = "blurb">
+		<p>Questions? Comments? Found a bug? Contact me on Twitter! <a href="https://twitter.com/Vykaris" class="twitter-follow-button" data-show-count="false">Follow @Vykaris</a><script async src="//platform.twitter.com/widgets.js" charset="utf-8"></script></p><p id="disclaimer">All copyrighted material displayed here is property of its owners. This site is not officially affiliated with the developer or publisher of Dead By Daylight.</p>
+		</div>
+		</div>
+		<div id="overpanel">
+		</div>
+<script type="text/javascript"src="http://www.dbdbuilder.net/dbdbuilder2.js"></script>
+	</body>
+
+</html>
+
+
